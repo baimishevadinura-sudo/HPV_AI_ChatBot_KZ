@@ -21,10 +21,10 @@
   nav { position: sticky; top: 0; background: rgba(253,247,242,.92); backdrop-filter: blur(6px); padding: 12px 20px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; font-size: 14px; z-index: 10; }
   nav a { color: var(--ink); text-decoration: none; background: var(--card); border-radius: 999px; padding: 5px 14px; box-shadow: 0 2px 8px rgba(61,49,40,.06); font-weight: 600; }
   nav a:hover { background: var(--accent); color: #fff; }
-  section { max-width: 860px; margin: 28px auto; padding: 48px 44px; background: var(--card); border-radius: 28px; box-shadow: var(--shadow); }
+  section { max-width: none; margin: 28px 32px; padding: 48px clamp(28px, 5vw, 80px); background: var(--card); border-radius: 28px; box-shadow: var(--shadow); }
   section#opening { background: var(--accent-soft); }
   section#verdict { background: var(--warn-soft); }
-  section#transparency, section#ledger, section#sources { background: #fbf8f4; box-shadow: none; border: 1px solid var(--line); }
+  section#transparency, section#sources { background: #fbf8f4; box-shadow: none; border: 1px solid var(--line); }
   h1, h2, h3, h4 { line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
   h1 { font-size: 38px; color: #22495a; }
   h2 { font-size: 28px; color: #22495a; }
@@ -35,6 +35,7 @@
   b { font-weight: 700; }
   .note { font-size: 13px; color: var(--muted); }
   .verify { font-size: 12px; background: var(--neutral-soft); border-radius: 10px; padding: 8px 12px; margin: 8px 0; }
+  .pull-label { display: table; margin-bottom: 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #3b2f63; background: #fff; border-radius: 999px; padding: 3px 12px; }
   .pull { font-size: 22px; font-weight: 700; line-height: 1.45; background: var(--lav); color: #3b2f63; border-radius: 20px; padding: 22px 26px; margin: 30px 0; }
   .cite { font-size: 12px; color: var(--muted); white-space: nowrap; }
   .draft { font-size: 13px; background: var(--neutral-soft); color: #7a5a10; padding: 8px 14px; border-radius: 12px; margin-bottom: 12px; }
@@ -118,7 +119,7 @@
   .compare h4 { text-align: center; margin: 0 0 6px; }
 
   /* Study cards */
-  .studies { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .studies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
   .study { border-radius: 20px; padding: 18px 20px; background: #fbf8f4; }
   .study:nth-child(1) { background: var(--lav); } .study:nth-child(2) { background: var(--warn-soft); }
   .study:nth-child(3) { background: var(--neutral-soft); } .study:nth-child(4) { background: var(--accent-soft); }
@@ -183,6 +184,20 @@
   .hero-art svg, .sec-art svg { width: 100%; height: auto; display: block; }
   .sec-art { float: right; width: 150px; margin: -18px -8px 8px 20px; }
 
+  /* Case cards */
+  .cases-h { display: inline-block; border-bottom: 4px solid var(--accent); padding-bottom: 6px; }
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 18px 0; }
+  .case { background: var(--card); border: 1px solid #d7ebe6; border-top: 8px solid var(--accent); border-radius: 18px; padding: 18px 20px 8px; box-shadow: var(--shadow); }
+  .case.counter { grid-column: 1 / -1; border-color: #f3d5cc; border-top-color: var(--warn); }
+  .case-pill { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--accent); border-radius: 999px; padding: 4px 12px; }
+  .case.counter .case-pill { background: var(--warn); }
+  .case h4 { font-size: 19px; margin: 12px 0 6px; color: #22495a; }
+  .case p { font-size: 15px; line-height: 1.6; margin: 8px 0; }
+  .case-src { font-size: 13px !important; color: var(--muted); background: #f7f4ef; border-radius: 10px; padding: 6px 10px; }
+  .case .takes { background: var(--accent-soft); border-radius: 12px; padding: 8px 12px; font-size: 14px; }
+  .case.counter .takes { background: var(--warn-soft); }
+  .limits { background: var(--neutral-soft); border-left: 6px solid var(--neutral); border-radius: 14px; padding: 14px 18px; font-size: 15px; line-height: 1.6; color: #5e4a10; margin: 6px 0 26px; }
+
   /* Receipt */
   .receipt { max-width: 470px; margin: 30px auto; background: #fffdf8; padding: 26px 28px; font-family: "Courier New", monospace; font-size: 14px; border-radius: 18px; box-shadow: var(--shadow); line-height: 1.45; }
   .receipt h3 { text-align: center; margin: 0 0 4px; font-size: 16px; letter-spacing: .1em; font-family: var(--sans); }
@@ -207,7 +222,7 @@
     section { margin: 16px 10px; padding: 32px 20px; border-radius: 22px; }
     h1 { font-size: 29px; } h2 { font-size: 24px; }
     .bar-row { grid-template-columns: 1fr; gap: 2px; }
-    .compare, .grid2, .studies, .demo { grid-template-columns: 1fr; }
+    .compare, .grid2, .studies, .demo, .cases { grid-template-columns: 1fr; }
     nav { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding: 10px 12px; }
     nav a { white-space: nowrap; flex: 0 0 auto; }
     .demo-log { height: 360px; }
@@ -228,7 +243,6 @@
   <a href="#solution">4. Solution &amp; bill</a>
   <a href="#verdict">Verdict</a>
   <a href="#transparency">AI transparency</a>
-  <a href="#ledger">Fact-check ledger</a>
 </nav>
 
 <!-- ================================ OPENING ================================ -->
@@ -318,8 +332,8 @@
 
   <p class="takeaway">Cervical cancer is preventable, yet Kazakhstan&rsquo;s first HPV vaccine programme collapsed under parental refusal. The vaccine is now back.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Cervical cancer is one of the most preventable cancers, yet it is the second most common cancer among women in Kazakhstan <span class="cite">(Kassymbekova et al., 2023)</span>. In 2021 it had a crude incidence of 18.3 cases and a crude mortality of 9.1 deaths per 100,000 women, which means roughly 1,800 new cases and 600 deaths every year <span class="cite">(Kassymbekova et al., 2023)</span>. Almost all of it is caused by the human papillomavirus (HPV), and a vaccine given before adolescence prevents most of it. The World Health Organization's goal is for 90% of girls to be fully vaccinated by age 15 by 2030 <span class="cite">(WHO, 2020)</span>.</p>
-  <p>Kazakhstan has tried this before. Its first HPV vaccination pilot collapsed after negative media reports about side effects were followed by mass parental refusal <span class="cite">(Kassymbekova et al., 2023)</span>. The sources do not even agree on its dates (see the timeline). A similar story played out in Japan, where reports of side effects cut HPV coverage to below 1% <span class="cite">(Babi et al., 2023)</span>. Halting the programme also cost Kazakhstan its place in the global vaccine supply queue <span class="cite">(Astana Times, 2025)</span>.</p>
+  <p>Cervical cancer is one of the most preventable cancers, yet it is the second most common cancer among women in Kazakhstan <span class="cite">(Kassymbekova et al., 2023)</span>. In 2021 it had a crude incidence of 18.3 cases per 100,000 women; the same paper puts the burden at about 1,800 new cases and 600 deaths a year <span class="cite">(Kassymbekova et al., 2023)</span>. Almost all of it is caused by the human papillomavirus (HPV), and a vaccine given before adolescence prevents most of it. The World Health Organization's goal is for 90% of girls to be fully vaccinated by age 15 by 2030 <span class="cite">(WHO, 2020)</span>.</p>
+  <p>Kazakhstan has tried this before. Its first HPV vaccination pilot collapsed after negative media reports about side effects were followed by mass parental refusal <span class="cite">(Kassymbekova et al., 2023)</span>. The sources do not even agree on its dates (see the timeline). Halting the programme also cost Kazakhstan its place in the global vaccine supply queue <span class="cite">(Astana Times, 2025)</span>.</p>
   </details>
   <div class="timeline" aria-label="Timeline of HPV vaccination in Kazakhstan">
     <div class="t-item"><span class="t-date">2008</span> &middot; National cervical cancer screening programme begins.</div>
@@ -335,8 +349,8 @@
 
   <p class="takeaway">Since 2024 the vaccine is free again, but each year first doses still reach less than half of the target group.</p>
   <figure>
-    <p class="note" style="margin-top:0;"><strong>A. Share of the target group vaccinated each year</strong> (WHO/UNICEF estimates)</p>
-    <div class="bars" role="img" aria-label="HPV vaccination programme coverage among girls in Kazakhstan, WHO/UNICEF estimates. First dose: 38% in 2024, 47% in 2025. Last dose: 45% in 2025. WHO target: 90%.">
+    <p class="note" style="margin-top:0;"><strong>A. Share of the target group vaccinated each year</strong> (WHO estimates)</p>
+    <div class="bars" role="img" aria-label="HPV vaccination programme coverage among girls in Kazakhstan, WHO estimates. First dose: 38% in 2024, 47% in 2025. Last dose: 45% in 2025. WHO target: 90%.">
       <div class="bar-row"><div>2024 &middot; 1st dose</div>
         <div class="bar-track"><div class="bar" style="width:38%">38%</div><div class="target-line" style="left:90%"><span class="target-label">WHO target 90%</span></div></div></div>
       <div class="bar-row"><div>2025 &middot; 1st dose</div>
@@ -354,11 +368,11 @@
         <div><div class="bar-track" style="margin-bottom:4px"><div class="bar" style="width:19.4%">58.6k</div></div>
              <div class="bar-track"><div class="bar alt" style="width:6.3%"><span class="out">19.1k</span></div></div></div></div>
     </div>
-    <figcaption>Figure 1. HPV vaccination of girls in Kazakhstan. A: doses given in each calendar year as a share of the target group. Sources: WHO/UNICEF HPV vaccination coverage estimates for Kazakhstan, 2025 revision (WHO Immunization Data Portal, accessed 23 Nov 2026); target from WHO (2020). B: running totals since September 2024, in thousands of girls, including catch-up ages. Source: Ministry of Healthcare of Kazakhstan, official Telegram post (Nov 2026) [add link]. The panels count different groups over different periods, so their numbers should not be added together. WHO's target is measured "by age 15", which cannot be estimated yet for a programme this new, so panel A is the closest available measure. The 2025 last-dose figure includes second doses for girls who started in 2024, so it is not the share of girls who finished the course.</figcaption>
+    <figcaption>Figure 1. HPV vaccination of girls in Kazakhstan. A: doses given in each calendar year as a share of the target group. Sources: WHO HPV estimates for Kazakhstan, 2025 revision (WHO Immunization Data Portal, accessed 23 Nov 2026); target from WHO (2020). B: running totals since September 2024, in thousands of girls, including catch-up ages. Source: Ministry of Healthcare of Kazakhstan, official Telegram channel <a href="https://t.me/DenMinPR">t.me/DenMinPR</a> (post of Nov 2026). The panels count different groups over different periods, so their numbers should not be added together. WHO's target is measured "by age 15", which cannot be estimated yet for a programme this new, so panel A is the closest available measure. The 2025 last-dose figure includes second doses for girls who started in 2024, so it is not the share of girls who finished the course.</figcaption>
   </figure>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Since September 2024 the vaccine has been free again, delivered through schools to girls aged 11&ndash;13 and, since May 2026, to girls aged 14&ndash;17 <span class="cite">(Ministry of Healthcare, 2026)</span>. Figure 1 shows how far the programme has come and how far it still has to go.</p>
-  <p>First-dose coverage rose from 38% to 47% in the programme's first full year, but the number of first doses given in 2025 still equalled less than half of the target group. Low HPV coverage is common worldwide: WHO estimates global first-dose coverage among girls at 33% in 2025 <span class="cite">(WHO, 2026)</span>. In Kazakhstan, though, it sits next to excellent coverage for routine childhood vaccines: in 2022, 97.1% of infants received their primary DTP series <span class="cite">(Kassabekova et al., 2025)</span>. The problem is specific to this vaccine.</p>
+  <p>Since September 2024 the vaccine has been free again, offered to girls aged 11&ndash;13 and, since May 2026, to girls aged 14&ndash;17 <span class="cite">(Ministry of Healthcare, 2026)</span>, and for girls aged 11&ndash;13 it is delivered in schools after a parent signs consent <span class="cite">(Kassabekova et al., 2025)</span>. Figure 1 shows how far the programme has come and how far it still has to go.</p>
+  <p>First-dose coverage rose from 38% to 47% in the programme's first full year, but the number of first doses given in 2025 still equalled less than half of the target group. Low HPV coverage is common worldwide: WHO estimates global first-dose coverage among girls at 33% in 2025 <span class="cite">(WHO, 2026b)</span>.</p>
   </details>
 
 
@@ -366,15 +380,11 @@
   <h3>Who is affected, and who decides</h3>
   <p class="takeaway">Girls are at risk, but parents, usually mothers, decide by signing a voluntary consent form.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>The people at risk are girls, but the people who decide are their parents. Vaccination is voluntary and requires a parent's signature <span class="cite">(Ministry of Healthcare, 2026)</span>, and in practice the decision-maker is usually the mother: mothers made up 87.7% of participating parents in a large Chinese school trial <span class="cite">(Hou et al., 2025)</span>, and Kazakh survey research focuses on mothers for the same reason <span class="cite">(Babi et al., 2023)</span>. So the unit of this problem is a single household decision, made quickly, often in a messenger chat, about a vaccine linked to sex and cancer and to a programme that failed once before.</p>
+  <p>The people at risk are girls, but the people who decide are their parents. Vaccination is voluntary and requires a parent's signature <span class="cite">(Ministry of Healthcare, 2026)</span>, and in practice mothers play a significant role in that decision, which is why Kazakh survey research on the vaccine focuses on them <span class="cite">(Babi et al., 2023)</span>. So the unit of this problem is a single household decision, made quickly, often in a messenger chat, about a vaccine linked to sex and cancer and to a programme that failed once before.</p>
   </details>
 
 
-  <p class="pull">Kazakhstan gave up on this vaccine once, after negative media reports turned into mass parental refusal. Whether the relaunch ends differently depends on one question: at the moment a parent decides, whom do they trust, and can a chatbot carry that trust when the state cannot?</p>
-  <p class="takeaway">Three forces stand in the way: distrust of the state, an information gap and stigma around sexual health.</p>
-  <details class="more"><summary>Read the full analysis</summary>
-  <p>The story has three acts: a rumour, a retreat and a sequel. The first programme was not stopped because the vaccine was shown to be unsafe: reports of perceived side effects were followed by mass parental refusal, and the state withdrew <span class="cite">(Kassymbekova et al., 2023)</span>. The relaunch now faces a new generation of parents, the same messenger chats and the memory of that retreat. The evidence reviewed below points to three forces. The first is <b>institutional distrust</b>: Kazakh women trust doctors and scientists far more than the government or the pharmaceutical industry, and women affected by the failed pilot are less positive about the vaccine <span class="cite">(Aimagambetova et al., 2022)</span>. The second is an <b>information gap</b>: most mothers know very little about HPV, and the ones who know least are undecided rather than hostile <span class="cite">(Babi et al., 2023)</span>. The third is <b>stigma</b>: mothers who find it hard to talk about sexual health with their daughters are much more likely to oppose the vaccine. The first time, negative media reports were enough to tip parents into refusal; surveys since then show all three forces are still present. Whether the relaunch repeats the old story depends on who parents hear from at the moment they decide. Any tool the state builds speaks with the state's voice, the voice parents trust least. Whether an AI chatbot can instead carry the voice of doctors, before the rumour wins again, is a question about trust, memory and power, not only about medicine, and that is what makes it a question for political science.</p>
-  </details>
+  <p class="pull"><span class="pull-label">My social-science question</span>Kazakhstan gave up on this vaccine once, after negative media reports turned into mass parental refusal. Whether the relaunch ends differently depends on one question: at the moment a parent decides, whom do they trust, and who could earn that trust back?</p>
 
 
 </section>
@@ -393,9 +403,9 @@
   <line x1="122" y1="96" x2="136" y2="110" stroke="#22495a" stroke-width="7" stroke-linecap="round"/>
 </svg></div>
   <h2><small>Section 2</small>Background &amp; data: what is counted, and what is not</h2>
-  <p class="takeaway">Four kinds of data exist: official coverage reports, Ministry totals, a refusal register and surveys. They do not fully agree.</p>
+  <p class="takeaway">Three official sources count HPV vaccination: coverage reports, Ministry totals and a refusal register. They do not fully agree.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Four kinds of data describe HPV vaccination in Kazakhstan. <b>Administrative coverage</b> is reported every year by the Ministry to WHO and UNICEF, which publish their own estimates alongside it. <b>Running totals</b> appear in Ministry press posts. A national <b>refusal register</b> records parents who formally decline a vaccine, and started recording HPV in 2025 <span class="cite">(Chayakova et al., 2026, preprint)</span>. Finally, a handful of <b>surveys and focus groups</b> describe what mothers and health workers know and believe. Each source answers a different question, and the gaps between them matter as much as the numbers.</p>
+  <p>Three official sources count HPV vaccination in Kazakhstan. <b>Administrative coverage</b> is reported every year by the Ministry to WHO, which publishes its own estimates alongside it. <b>Running totals</b> appear in Ministry press posts. A national <b>refusal register</b> records parents who formally decline a vaccine, and started recording HPV in 2025 <span class="cite">(Chayakova et al., 2026, preprint)</span>. What people think about the vaccine comes from surveys and focus groups, which are reviewed in Section 3. Each official source answers a different question, and the gaps between them matter as much as the numbers.</p>
   </details>
 
 
@@ -405,67 +415,17 @@
 
 
   <figure>
-    <div class="bars" role="img" aria-label="Same 90,613 doses divided by two different target populations: 192,936 gives 47% (WHO/UNICEF estimate); 206,360 gives 43.91% (Kazakhstan's own report).">
-      <div class="bar-row"><div>WHO/UNICEF estimate<br><span class="note">90,613 &divide; 192,936</span></div>
+    <div class="bars" role="img" aria-label="Same 90,613 doses divided by two different target populations: 192,936 gives 47% (WHO estimate); 206,360 gives 43.91% (Kazakhstan's own report).">
+      <div class="bar-row"><div>WHO estimate<br><span class="note">90,613 &divide; 192,936</span></div>
         <div class="bar-track"><div class="bar" style="width:47%">47%</div></div></div>
       <div class="bar-row"><div>Kazakhstan's own report<br><span class="note">90,613 &divide; 206,360</span></div>
         <div class="bar-track"><div class="bar alt" style="width:43.91%">43.91%</div></div></div>
     </div>
-    <figcaption>Figure 2. HPV first-dose coverage among girls in Kazakhstan, 2025: one numerator, two denominators. My calculation from the WHO Immunization Data Portal export (WHO/UNICEF HPV coverage estimates, 2025 revision; rows "HPV Female, 1st dose" and "HPV vaccination program coverage, first dose, females").</figcaption>
+    <figcaption>Figure 2. HPV first-dose coverage among girls in Kazakhstan, 2025: one numerator, two denominators. My calculation from the WHO Immunization Data Portal export (WHO HPV estimates, 2025 revision; rows "HPV Female, 1st dose" and "HPV vaccination program coverage, first dose, females").</figcaption>
   </figure>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>The clearest example comes from the official coverage data. For 2025, Kazakhstan's own report and the WHO/UNICEF estimate count exactly the same 90,613 first doses. But they divide them by different target populations, and so they arrive at different coverage rates.</p>
+  <p>The clearest example comes from the official coverage data. For 2025, Kazakhstan's own report and the WHO estimate count exactly the same 90,613 first doses. But they divide them by different target populations, and so they arrive at different coverage rates.</p>
   <p>A three-point gap may look minor, but it means that nobody can say with certainty how many girls the programme is supposed to reach. Every target, budget and evaluation, including one for an AI tool, rests on that denominator.</p>
-  </details>
-
-
-
-  <h3>What studies of HPV attitudes find, and why they disagree</h3>
-  <p class="takeaway">Four studies, one pattern: the closer the decision is to a mother of a daughter, the less positive the attitude.</p>
-
-
-  <div class="studies">
-    <article class="study">
-      <div class="kind">Focus groups</div>
-      <h4>Kassabekova et al., 2025</h4>
-      <div class="meta">53 mothers of girls aged 9&ndash;14 &middot; 5 cities &middot; 2023</div>
-      <p>Little knowledge of HPV and scepticism towards newer vaccines.</p>
-      <div class="tags"><span>Infertility fears</span><span>&ldquo;Cancer is hereditary&rdquo;</span><span>Memory of the failed pilot</span><span>Trust gynaecologists</span></div>
-    </article>
-    <article class="study">
-      <div class="kind">Survey</div>
-      <h4>Babi et al., 2023</h4>
-      <div class="meta">191 mothers &middot; 4 cities &middot; 2021&ndash;22</div>
-      <p>41% of mothers of daughters positive; 36% undecided.</p>
-      <div class="tags"><span>Knowledge 2.4 of 12</span><span>Hard to discuss sexual health</span><span>Refuse vaccines themselves</span></div>
-    </article>
-    <article class="study">
-      <div class="kind">Survey</div>
-      <h4>Aimagambetova et al., 2022</h4>
-      <div class="meta">233 women &middot; same 4 cities &middot; 2021&ndash;22</div>
-      <p>54% positive, including women without children.</p>
-      <div class="tags"><span>Distrust of government</span><span>Alternative medicine</span><span>Failed 2013 programme</span></div>
-    </article>
-    <article class="study">
-      <div class="kind">Survey of health workers</div>
-      <h4>Kassymbekova et al., 2024</h4>
-      <div class="meta">1,189 professionals &middot; 2022&ndash;23</div>
-      <p>72.6% would recommend the vaccine to patients.</p>
-      <div class="tags"><span>Public mistrust 49.4%</span><span>Fear of side effects 45.9%</span><span>Own knowledge gaps 30.3%</span></div>
-    </article>
-  </div>
-
-  <figure>
-    <div class="bars" role="img" aria-label="Share with positive attitudes to the HPV vaccine: 54% of women (Aimagambetova 2022), 45% of all mothers and 41% of mothers of daughters (Babi 2023).">
-      <div class="bar-row"><div>Women at gynaecology clinics<br><span class="note">Aimagambetova et al.</span></div><div class="bar-track"><div class="bar" style="width:54%">54%</div></div></div>
-      <div class="bar-row"><div>All mothers<br><span class="note">Babi et al.</span></div><div class="bar-track"><div class="bar" style="width:45%">45%</div></div></div>
-      <div class="bar-row"><div>Mothers of daughters<br><span class="note">Babi et al.</span></div><div class="bar-track"><div class="bar alt" style="width:41%">41%</div></div></div>
-    </div>
-    <figcaption>Figure 3. Share with a positive attitude to HPV vaccination in two surveys run in the same four cities in the same months (Dec 2021&ndash;Feb 2022). Sources: Aimagambetova et al. (2022); Babi et al. (2023). The surveys use different questions and samples, so the bars show how much the answer depends on whom you ask, not a trend.</figcaption>
-  </figure>
-  <details class="more"><summary>Read the full analysis</summary>
-  <p>Four Kazakh studies ask, in different ways, what people think about the HPV vaccine. They use different methods and different samples, and they do not produce a single answer.</p>
-  <p>The comparison is revealing. Two surveys in the same cities, in the same months, find 54% and 45% positive, and the figure drops to 41% among the people who actually decide: mothers of daughters. Part of the gap is likely about whom they sampled: the first survey also included women without children. In these data, the more personally the decision concerns people, the less positive they appear. The focus groups explain the numbers rather than repeat them: they show that hesitation is built on specific beliefs (infertility, heredity) and on memories of the failed pilot. Health workers, asked about their patients, name the same two barriers first: mistrust and fear of side effects. All four studies point the same way, but none of them measures attitudes after the 2024 relaunch, and none of the parent studies is representative of rural families.</p>
   </details>
 
 
@@ -481,14 +441,12 @@
   <p class="takeaway">We know how many doses are given, but not who is missed or why.</p>
 
   <ul class="dq" aria-label="Questions the data can and cannot answer">
-    <li><span class="q-text">How many first doses are given each year?</span><span class="chip yes">Answered</span><span class="q-src">WHO/UNICEF, 2024&ndash;2025</span></li>
+    <li><span class="q-text">How many first doses are given each year?</span><span class="chip yes">Answered</span><span class="q-src">WHO, 2024&ndash;2025</span></li>
     <li><span class="q-text">How many girls complete both doses?</span><span class="chip no">No data</span><span class="q-src">Only doses per year are published</span></li>
     <li><span class="q-text">What is coverage in each region, city or village?</span><span class="chip part">Partly</span><span class="q-src">Astana only: 36.5% first dose, 2025 (Kazinform)</span></li>
-    <li><span class="q-text">How many parents refuse HPV, and where?</span><span class="chip yes">Answered</span><span class="q-src">Refusal register, 2025 (preprint)</span></li>
-    <li><span class="q-text">Why do parents refuse HPV specifically?</span><span class="chip part">Partly</span><span class="q-src">Focus groups with mothers of girls describe the reasons: infertility fears, safety, belief that cervical cancer is hereditary (Kassabekova et al., 2025). No national figures by reason.</span></li>
+    <li><span class="q-text">How many parents refuse HPV, and where?</span><span class="chip yes">Answered</span><span class="q-src">Refusal register, 2025 (preprint, not peer-reviewed)</span></li>
     <li><span class="q-text">What do mothers think?</span><span class="chip part">Partly</span><span class="q-src">Surveys 2021&ndash;22 and focus groups 2023, large cities</span></li>
     <li><span class="q-text">What do fathers, girls and rural parents think?</span><span class="chip no">No data</span><span class="q-src">Not sampled in any study found</span></li>
-    <li><span class="q-text">Have attitudes changed since the 2024 relaunch?</span><span class="chip part">Partly</span><span class="q-src">One Astana clinic: 22.2% refusing or intending to (Umbetzhanova et al., 2026, not reviewed here)</span></li>
     <li><span class="q-text">What share of girls is vaccinated by age 15, WHO&rsquo;s own measure?</span><span class="chip no">Not yet</span><span class="q-src">Programme too new to measure</span></li>
   </ul>
   <details class="more"><summary>Read the full analysis</summary>
@@ -510,10 +468,54 @@
   <text x="119" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#3f9c8c">?</text>
 </svg></div>
   <h2><small>Section 3</small>Current state of research</h2>
-  <p class="takeaway">Three approaches: what mothers believe, what health workers know, and which interventions work.</p>
+  <p class="takeaway">Two approaches: what parents think about HPV vaccination, and which interventions raise it.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Research on HPV vaccination in Kazakhstan is recent and small, and several of the key studies come from one research group at Nazarbayev University. It falls into three approaches: surveys of what mothers know and believe, qualitative and survey studies of the health workers who deliver the vaccine, and international trials of interventions, including the first trials of AI chatbots.</p>
+  <p>Research on HPV vaccination in Kazakhstan is recent and small, and several of the key studies come from one research group at Nazarbayev University. I review it in two approaches. The first is studies of attitudes: surveys and focus groups that ask women and mothers what they know, believe and trust. The second is studies of interventions: what has been tried around the world to raise HPV vaccination.</p>
   </details>
+
+
+  <h3>Three studies at a glance</h3>
+  <p class="takeaway">Three studies, one pattern: the closer the decision is to a mother of a daughter, the less positive the attitude.</p>
+
+
+  <div class="studies">
+    <article class="study">
+      <div class="kind">Focus groups</div>
+      <h4>Kassabekova et al., 2025</h4>
+      <div class="meta">53 mothers or caregivers of girls aged 9&ndash;14 &middot; 5 cities &middot; March 2023</div>
+      <p>Little awareness of HPV and cervical cancer; strong opposition fuelled by fears about infertility, safety and efficacy.</p>
+      <div class="tags"><span>Infertility fears</span><span>&ldquo;Cancer is hereditary&rdquo;</span><span>Trust depends on the doctor</span><span>Clinic, not school</span></div>
+      <div class="note" style="margin-top:8px">Sample: Methods 2.1.1. Findings: section 3.4.2 (Group 4: mothers of adolescent girls).</div>
+    </article>
+    <article class="study">
+      <div class="kind">Survey</div>
+      <h4>Babi et al., 2023</h4>
+      <div class="meta">191 mothers &middot; 4 cities &middot; 2021&ndash;22</div>
+      <p>41% of mothers of daughters positive; 36% undecided.</p>
+      <div class="tags"><span>Knowledge 2.4 of 12</span><span>Hard to discuss sexual health</span><span>Refuse vaccines themselves</span></div>
+    </article>
+    <article class="study">
+      <div class="kind">Survey</div>
+      <h4>Aimagambetova et al., 2022</h4>
+      <div class="meta">233 women &middot; same 4 cities &middot; 2021&ndash;22</div>
+      <p>54% positive, including women without children.</p>
+      <div class="tags"><span>Distrust of government</span><span>Alternative medicine</span><span>Failed 2013 programme</span></div>
+    </article>
+  </div>
+
+  <figure>
+    <div class="bars" role="img" aria-label="Share with positive attitudes to the HPV vaccine: 54% of women (Aimagambetova 2022), 45% of all mothers and 41% of mothers of daughters (Babi 2023).">
+      <div class="bar-row"><div>Women at gynaecology clinics<br><span class="note">Aimagambetova et al.</span></div><div class="bar-track"><div class="bar" style="width:54%">54%</div></div></div>
+      <div class="bar-row"><div>All mothers<br><span class="note">Babi et al.</span></div><div class="bar-track"><div class="bar" style="width:45%">45%</div></div></div>
+      <div class="bar-row"><div>Mothers of daughters<br><span class="note">Babi et al.</span></div><div class="bar-track"><div class="bar alt" style="width:41%">41%</div></div></div>
+    </div>
+    <figcaption>Figure 3. Share with a positive attitude to HPV vaccination in two surveys run in the same four cities in the same months (Dec 2021&ndash;Feb 2022). Sources: Aimagambetova et al. (2022); Babi et al. (2023). The surveys use different questions and samples, so the bars show how much the answer depends on whom you ask, not a trend.</figcaption>
+  </figure>
+  <details class="more"><summary>Read the full analysis</summary>
+  <p>Three Kazakh studies ask, in different ways, what people think about the HPV vaccine. They use different methods and different samples, and they do not produce a single answer.</p>
+  <p>The comparison is revealing. Two surveys in the same cities, in the same months, find 54% and 45% positive, and the figure drops to 41% among the people who actually decide: mothers of daughters. Part of the gap is likely about whom they sampled: the first survey also included women without children. In these data, the more personally the decision concerns people, the less positive they appear. The focus groups explain the numbers rather than repeat them: they show that hesitation is built on specific beliefs, such as fear of infertility and the belief that cervical cancer is hereditary. All three studies point the same way, but none of them measures attitudes after the 2024 relaunch, and none of the parent studies is representative of rural families.</p>
+  </details>
+
 
 
   <h3>1. What mothers know and believe</h3>
@@ -552,72 +554,53 @@
 
   <details class="more"><summary>Read the full analysis</summary>
   <p>Two surveys conducted between December 2021 and February 2022 in four large cities give the clearest picture. Among 191 mothers, only 45% had a positive attitude to HPV vaccination; among mothers of daughters, the group that actually decides, the figure was 41% <span class="cite">(Babi et al., 2023)</span>. Knowledge was strikingly low, a mean of 2.4 correct answers out of 12, and the most important finding is <i>who</i> knew least: mothers with neutral attitudes, whose median score was zero.</p>
-  <p>Where do mothers get their information? Almost 40% from social media and TV, and 35% from gynaecologists and family doctors; schools and paediatricians were among the least-used sources, and of mothers who reached a decision, only 36% found it easy <span class="cite">(Babi et al., 2023)</span>. That matters because the programme itself is delivered through schools. Stigma also appears directly in the data: among mothers who agreed it was hard to talk to their daughters about sexual health, 46% had negative attitudes to the vaccine.</p>
+  <p>Where do mothers get their information? Almost 40% from social media and TV, and 35% from gynaecologists and family doctors; schools and paediatricians were among the least-used sources, and of mothers who reached a decision, only 36% found it easy <span class="cite">(Babi et al., 2023)</span>. That matters because the programme itself is delivered through schools <span class="cite">(Kassabekova et al., 2025)</span>. Stigma also appears directly in the data: among mothers who agreed it was hard to talk to their daughters about sexual health, 46% had negative attitudes to the vaccine.</p>
   <p>The second survey, of 233 women, found 54% positive, and asked a question that goes to the heart of this project: whom do they trust?</p>
-  <p>Women trust scientists and medical workers several times more than the government, and the least trusted source is the messenger apps where rumours spread. Lower education, more children, belief in alternative medicine and having been affected by the failed 2013 programme were all linked to less positive attitudes <span class="cite">(Aimagambetova et al., 2022)</span>. Focus groups in five cities add the human detail: mothers feared infertility, thought cervical cancer was hereditary, preferred gynaecologists and oncologists as messengers, and disagreed by region about whether schools are safe places to vaccinate <span class="cite">(Kassabekova et al., 2025)</span>.</p>
+  <p>Women trust scientists and medical workers several times more than the government, and the least trusted source is the messenger apps where rumours spread. Lower education, more children, belief in alternative medicine and having been affected by the failed 2013 programme were all linked to less positive attitudes <span class="cite">(Aimagambetova et al., 2022)</span>. Focus groups in five cities add the human detail. Mothers had little awareness of HPV and its vaccine, many believed cervical cancer to be hereditary, and fears about infertility, safety and efficacy fuelled strong opposition. They decided after talking to family, doctors and peers, and trusted doctors only when they seemed competent and explained clearly. Most preferred vaccination in clinics; parents in Almaty and Taldykorgan were open to vaccination at school, while those in Pavlodar, Uralsk and Karaganda opposed it <span class="cite">(Kassabekova et al., 2025, Methods 2.1.1 and section 3.4.2)</span>.</p>
   </details>
 
-  <h3>2. The messengers: health workers</h3>
-  <p class="takeaway">The trusted messengers have gaps too: nurses scored 9 of 18 on HPV knowledge, physicians 13.</p>
-
-
-  <div class="quiz" id="quiz">
-    <div class="q" data-n="55.3" data-p="83.8" data-a="Yes. HPV causes almost all cervical cancer.">
-      <b>Can HPV cause cervical cancer?</b><br>
-      <button type="button" data-g="Yes">Yes</button><button type="button" data-g="No">No</button>
-      <div class="reveal" aria-live="polite"></div>
-    </div>
-    <div class="q" data-n="20.0" data-p="44.3" data-a="No. The vaccine used in Kazakhstan (Gardasil-4) covers four HPV types, including the two that cause most cervical cancers.">
-      <b>Does the HPV vaccine protect against all HPV types?</b><br>
-      <button type="button" data-g="Yes">Yes</button><button type="button" data-g="No">No</button>
-      <div class="reveal" aria-live="polite"></div>
-    </div>
-    <div class="q" data-n="39.8" data-p="72.4" data-a="Yes. Regional studies found high-risk HPV in 39% of women tested.">
-      <b>Is HPV common in Kazakhstan?</b><br>
-      <button type="button" data-g="Yes">Yes</button><button type="button" data-g="No">No</button>
-      <div class="reveal" aria-live="polite"></div>
-    </div>
-    <div class="q" data-n="41.8" data-p="72.4" data-a="9 to 14 years.">
-      <b>At what age does WHO recommend HPV vaccination?</b><br>
-      <button type="button" data-g="9-14">9&ndash;14</button><button type="button" data-g="15-18">15&ndash;18</button>
-      <div class="reveal" aria-live="polite"></div>
-    </div>
+  <h3>2. What works: communication, trust and the doctor&rsquo;s voice</h3>
+  <p class="takeaway">Three lessons from abroad: communicate early with clear safety messages and a quick answer to rumours, expect a scare to cost years even when it is reversed, and let doctors recommend the vaccine as routine. Information alone is not enough.</p>
+  <div class="studies">
+    <article class="study">
+      <div class="kind">Review &middot; 45 countries</div>
+      <h4>Gallagher et al., 2017</h4>
+      <div class="meta">Low- and middle-income countries</div>
+      <p>Communication matters as much as delivery: start early, make messages cover safety (including no effect on fertility) and government endorsement, and have government or WHO answer rumours quickly.</p>
+      <div class="tags"><span>Start early</span><span>Safety &amp; fertility</span><span>Government voice</span><span>Consent rules</span></div>
+      <div class="note" style="margin-top:8px">Table 5, Key recommendations (Communications).</div>
+    </article>
+    <article class="study">
+      <div class="kind">Registry study &middot; Denmark</div>
+      <h4>Hansen et al., 2020</h4>
+      <div class="meta">All girls, 2009&ndash;2019</div>
+      <p>A media scare cut on-time uptake at age 12 from 75% to 25%. A coalition campaign aimed at hesitant mothers, through doctors&rsquo; town halls and parent-to-parent messages, brought overall uptake back, partly through catch-up doses, but about 26,000 girls missed out.</p>
+      <div class="tags"><span>Hesitant, not unwilling</span><span>Doctors &amp; parents</span><span>Coalition</span></div>
+      <div class="note" style="margin-top:8px">Tables 1 and 2; Discussion.</div>
+    </article>
+    <article class="study">
+      <div class="kind">Randomised trial &middot; 30 clinics</div>
+      <h4>Brewer et al., 2017</h4>
+      <div class="meta">North Carolina, US &middot; 2015 &middot; ages 11&ndash;12</div>
+      <p>Doctors trained to announce the vaccine as routine raised first-dose uptake by 5.4 percentage points; training them to hold open conversations did not.</p>
+      <div class="tags"><span>Doctors&rsquo; voice</span><span>Announce, don&rsquo;t debate</span></div>
+      <div class="note" style="margin-top:8px">Abstract (Results).</div>
+    </article>
   </div>
-  <p class="note">Correct-answer rates from Kassymbekova et al. (2024), Figure 1 (nurses n = 591, physicians n = 598). Answers: Babi et al. (2023), egu.kz.</p>
-
-  <h3>3. What works: from leaflets to chatbots</h3>
-  <p class="takeaway">Reviews conclude that education alone is not enough. A chatbot raised vaccination in one trial and added nothing in another.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Internationally, the evidence on how to raise HPV vaccination is large but lopsided. A systematic review of 79 intervention studies found that 72.2% were conducted in the United States, the largest group (31.6%) were purely informational, and 76.3% worked at a single level (only parents, or only clinics); the authors conclude that education alone is not enough and that combined, multi-level programmes are needed <span class="cite">(Escoffery et al., 2023)</span>. A newer line of research tests large-language-model chatbots. Two randomised trials of HPV chatbots for parents reach opposite conclusions: one in Chinese schools found that a chatbot raised actual vaccination <span class="cite">(Hou et al., 2025)</span>, while one with online parent panels in three Western countries found it no better than a government leaflet <span class="cite">(Sehgal et al., 2026)</span>.</p>
+  <p>The evidence on how to raise HPV vaccination is large but lopsided. A systematic review of 79 intervention studies found that 72.2% came from the United States, the largest group (31.6%) only gave information, and 76.3% worked at a single level, such as parents only or clinics only. Its conclusion: education alone is not enough, and programmes need to work at several levels at once <span class="cite">(Escoffery et al., 2023)</span>. Three studies show what those levels look like in practice.</p>
+  <p><b>1. Communicate early, and answer rumours fast.</b> A review of HPV vaccination in 45 low- and middle-income countries puts communication at the centre. Social mobilisation should start at least a month before vaccination. Messages should cover cancer prevention, safety and efficacy (including the lack of any effect on fertility), government endorsement and the second dose. Members of government or WHO representatives should respond to rumours as quickly as possible, and consent processes should match those of routine vaccines, to avoid rumours <span class="cite">(Gallagher et al., 2017, Table 5)</span>. For Kazakhstan, the weak point is the voice this advice relies on: the government is the source women trust least.</p>
+  <p><b>2. A scare can be reversed, but slowly and at a cost.</b> In Denmark, extensive negative media coverage cut uptake to about half of its earlier level: 75% of girls born in 1999 and 2000 started vaccination at age 12, but only 25% of those born in 2004. Early responses relied on dry scientific information that did not engage the public. What followed was a campaign run by a coalition of the Danish Health Agency, the Danish Cancer Society and the Danish Medical Association, aimed at the 34% of parents who were hesitant rather than the 14% who were unwilling, through town-hall meetings with health professionals and parent-to-parent messages (&ldquo;My daughter is HPV vaccinated because&hellip;&rdquo;). Uptake recovered, but an estimated 26,000 fewer girls started vaccination <span class="cite">(Hansen et al., 2020, Tables 1 and 2)</span>.</p>
+  <p><b>3. How doctors speak matters.</b> In a randomised trial in 30 clinics in North Carolina, clinics whose doctors were trained to give brief &ldquo;announcements&rdquo;, which assume parents are ready to vaccinate, raised HPV vaccine initiation among 11- and 12-year-olds by 5.4 percentage points more than control clinics after six months. Training in open-ended &ldquo;conversations&rdquo; did not raise it beyond the existing trend <span class="cite">(Brewer et al., 2017)</span>.</p>
+  <p><b>What this means for Kazakhstan.</b> The three studies agree that the messenger matters as much as the message: Denmark recovered through doctors and other parents, not through the state speaking alone, and doctors move parents most when they speak with confidence. Access is not Kazakhstan&rsquo;s main barrier, since the vaccine is already free <span class="cite">(Ministry of Healthcare, 2026)</span> and organised around a school consent form. What is missing is a fast answer to the rumour, aimed at hesitant parents and spoken by voices they trust.</p>
   </details>
-
-
-  <h4 style="margin-top:28px;font-size:18px;">Two trials, two answers</h4>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th></th><th>Hou et al. (2025), <i>Nature Medicine</i></th><th>Sehgal et al. (2026), <i>JAMA Network Open</i></th></tr></thead>
-      <tbody>
-        <tr><td><b>Where</b></td><td>China: Shanghai and urban and rural Anhui; vaccine paid out of pocket</td><td>US, Canada and UK; online panel</td></tr>
-        <tr><td><b>Who</b></td><td>2,671 parents in 180 school classes (87.7% mothers)</td><td>1,297 parents of unvaccinated children</td></tr>
-        <tr><td><b>The bot</b></td><td>GPT-4 plus retrieval from a knowledge base verified by public health experts; "expert" and "nurse" personas</td><td>GPT-4o prompted to encourage vaccination; default or short conversational style</td></tr>
-        <tr><td><b>Exposure</b></td><td>Two weeks, on demand; link re-sent every four days</td><td>One 3-minute chat</td></tr>
-        <tr><td><b>Compared with</b></td><td>Usual local promotion</td><td>No message <i>and</i> official government materials</td></tr>
-        <tr><td><b>Result</b></td><td>7.1% vs 1.8% booked or received the vaccine in two weeks; consultations with health workers 49.1% vs 17.6%; effect 8.81 times in rural areas</td><td>Intention rose about as much as with a leaflet (effect sizes 0.48 and 0.33 vs 0.53); chatbot effects gone after 45 days; no group vaccinated more</td></tr>
-        <tr><td><b>Caveats</b></td><td>No effect on stated willingness or confidence; compared with usual local promotion, not with a good leaflet</td><td>Brief, artificial exposure; mostly White, female, AI-literate sample</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <details class="more"><summary>Why the two trials disagree</summary>
-  <p>Read together, the trials suggest that a chatbot is not magic persuasion. Hou's bot worked when it was embedded in a real school process, available for days rather than minutes, grounded in verified content, and when it sent parents <i>to</i> health workers: about half of the parents in the chatbot group consulted one. Sehgal's bot, a single persuasive chat against a well-designed leaflet, added nothing. The two trials even disagree on tone: Hou's warm nurse persona did better, while Sehgal's exploratory analysis linked empathy-heavy conversations to lower intention. Kazakhstan's situation sits closer to Hou's: a school programme and messenger-based parent communities. But one difference matters: the vaccine is free in Kazakhstan and was paid out of pocket in Hou's study areas, so the barriers differ and the size of the effect may not transfer. So any Kazakh tool should be tested against an improved egu.kz page, not against nothing.</p>
-  </details>
-
-
 
 
   <h3>The gap</h3>
-  <p class="takeaway">None of the studies reviewed here tests a digital tool in Kazakhstan, or asks parents what they need at the moment of consent.</p>
+  <p class="takeaway">The research shows whom Kazakh parents trust and what works abroad, but not how to bring a trusted voice to parents at the moment they decide.</p>
   <details class="more"><summary>Read the full analysis</summary>
-  <p>Three things are missing. None of the studies reviewed here tests a digital or AI intervention for vaccination in Kazakhstan or Central Asia. None asks parents what they need to know <i>at the moment of the school consent form</i>, after the 2024 relaunch. And none connects the two findings that sit side by side in this literature: that the undecided middle knows least, and that the people they trust most, doctors, are not the ones present when the rumour arrives at 21:47. This project addresses that gap.</p>
+  <p>Two bodies of research sit side by side but do not meet. The Kazakh studies explain why mothers hesitate: they know little, fear infertility, and trust doctors far more than the government <span class="cite">(Babi et al., 2023; Aimagambetova et al., 2022; Kassabekova et al., 2025)</span>. The international studies explain what turns hesitation around: early messages, fast answers to rumours, and confident, trusted messengers such as doctors and other parents <span class="cite">(Gallagher et al., 2017; Hansen et al., 2020; Brewer et al., 2017)</span>.</p>
+  <p>The link between them is missing. All three Kazakh studies were carried out in cities before the 2024 relaunch, and none asks what parents need at the moment of the school consent form. Gallagher&rsquo;s advice, meanwhile, leans on a government voice, the one Kazakh parents trust least. No study reviewed here asks how Kazakhstan can bring a trusted medical voice to hesitant parents at the moment they decide, for example in a parents&rsquo; chat at 21:47. That is the gap this project addresses.</p>
   </details>
 
 </section>
@@ -639,18 +622,47 @@
   <h2><small>Section 4</small>The AI-assisted solution, and what it would cost</h2>
 
   <h3>The proposal: &laquo;Саулық&raquo; (Saulyq): health advice for parents</h3>
-  <p class="takeaway">Saulyq is a doctor-checked HPV chatbot for parents, offered with the school consent form, that answers only from official sources and hands over to a nurse.</p>
+  <p class="takeaway">Saulyq is a doctor-checked HPV chatbot for parents, offered with the school consent form, that answers only from official sources and tells parents when to see a doctor or call the 7701 hotline.</p>
   <details class="more"><summary>See the full design</summary>
-  <p>Saulyq (Kazakh for "health, well-being") is a small chatbot for parents, available in Kazakh and Russian for the two weeks around each school's HPV consent deadline. Its design builds on the two documented case studies reviewed in Section 3, the school-based chatbot trial in China (Hou et al., 2025) and the online trial in the US, Canada and UK (Sehgal et al., 2026), and on the Kazakh evidence about trust and knowledge:</p>
+  <p>Saulyq (Kazakh for "health, well-being") is a small chatbot for parents, available in Kazakh and Russian for the two weeks around each school's HPV consent deadline. Its design builds on the three documented cases below (two successes and one counter-case) and on the Kazakh evidence about trust and knowledge:</p>
   <ul>
     <li><b>Where it lives:</b> a link and QR code printed on the consent form, re-sent by the class teacher to the parents' chat. The Chinese trial reached parents through class teachers and parents' messenger groups and re-sent its link every four days.</li>
-    <li><b>What it knows:</b> nothing but vetted content: the National Center for Public Health's egu.kz pages and Ministry guidance, reviewed by gynaecologists. It uses retrieval-augmented generation, meaning the model answers only from that library and says "I don't know: ask your school nurse or call 7701" when the answer is not there.</li>
-    <li><b>Whose voice:</b> answers are visibly signed by named doctors, not by "the Ministry", because mothers trust medical workers several times more than the government (Figure 5). The tone is plain and warm: in the Chinese trial, parents who used the "nurse" persona were 2.08 times more likely to start vaccination than those using only the "expert" persona.</li>
+    <li><b>What it knows:</b> nothing but vetted content: the National Center for Public Health's egu.kz pages and Ministry guidance, reviewed by gynaecologists. It uses retrieval-augmented generation, meaning the model answers only from that library and says "I don't know: ask your polyclinic doctor or call 7701" when the answer is not there.</li>
+    <li><b>Whose voice:</b> answers are visibly signed by named doctors, not by "the Ministry", because mothers trust medical workers several times more than the government (Figure 5). The tone is plain and warm: in the Chinese trial, parents who used the "nurse" persona were 2.08 times more likely to start vaccination than those using only the "expert" persona ("nurse" there describes a tone, not who checks the answers).</li>
     <li><b>What it never does:</b> it asks for no name, phone number or school, keeps no link to the refusal register, and is labelled as AI, as Kazakhstan's AI Law requires.</li>
-    <li><b>Who runs it:</b> the National Center for Public Health, with a small team of medical reviewers. A second version of the same library gives school nurses a quick-reference tool, since nurses had the lowest HPV knowledge.</li>
+    <li><b>Who runs it:</b> the National Center for Public Health, with a small team of medical reviewers.</li>
   </ul>
   </details>
 
+
+  <h3 class="cases-h">Three documented cases elsewhere</h3>
+  <div class="cases">
+    <article class="case ok">
+      <span class="case-pill">Case 1 &middot; China &middot; Success</span>
+      <h4>An HPV vaccine chatbot for parents of schoolgirls</h4>
+      <p class="case-src"><b>Source:</b> Hou et al. (2025), <i>Nature Medicine</i>: a cluster randomised trial in China, January&ndash;May 2024.</p>
+      <p><b>What was built.</b> Researchers built a chatbot on GPT-4 that answers only from a knowledge base drawn from China&rsquo;s health authorities and checked by public health experts, with a formal &ldquo;expert&rdquo; and a warm &ldquo;nurse&rdquo; persona. The trial covered 180 middle-school classes; parents in 90 of them could use the chatbot for two weeks, and the link was re-sent every four days.</p>
+      <p><b>What it achieved.</b> 7.1% of parents in the chatbot group booked or got the vaccine for their daughter within two weeks, against 1.8% with usual promotion. About half (49.1%) consulted a health professional about HPV vaccination, against 17.6%. In rural areas, parents with the chatbot were 8.81 times as likely to book or vaccinate.</p>
+      <p class="takes"><b>What Saulyq takes from it</b> (my design choice, not the paper&rsquo;s): a verified library only, a warm tone, links sent through class teachers and parent chats, and a route to health workers.</p>
+    </article>
+    <article class="case ok">
+      <span class="case-pill">Case 2 &middot; Hong Kong &middot; Success</span>
+      <h4>A rule-bound &ldquo;hybrid&rdquo; chatbot for older adults</h4>
+      <p class="case-src"><b>Source:</b> Wang et al. (2025), <i>JAMA Network Open</i>: a randomised clinical trial in Hong Kong.</p>
+      <p><b>What was built.</b> A chatbot for adults aged 65+ who use WhatsApp. Fixed, rule-based messages matched each person&rsquo;s readiness to vaccinate, and an AI question-and-answer part replied to their questions in real time. It ran in four monthly sessions.</p>
+      <p><b>What it achieved.</b> In a randomised trial of 374 people, 29.4% of the hybrid-chatbot group got the pneumococcal vaccine, against 18.7% of those who only received a link to a standard video. More of them engaged at least once: 79.7% against 57.8%.</p>
+      <p class="takes"><b>What Saulyq takes from it</b> (my design choice, not the paper&rsquo;s): strict rules about what the bot may say, combined with real answers to people&rsquo;s own questions, on a messenger they already use.</p>
+    </article>
+    <article class="case counter">
+      <span class="case-pill">Counter-case &middot; US, UK, Canada &middot; No added benefit</span>
+      <h4>A one-off AI chat against government health materials</h4>
+      <p class="case-src"><b>Source:</b> Sehgal et al. (2026), <i>JAMA Network Open</i>: a randomised clinical trial in the US, UK and Canada.</p>
+      <p><b>What was built.</b> A GPT-4o chatbot prompted to encourage HPV vaccination, tested in one conversation of at least three minutes with 1,297 parents recruited online, and compared with government public health materials and with no message.</p>
+      <p><b>What it achieved.</b> Right after the chat, intention to vaccinate rose, but not more than with the government materials (effect sizes 0.48 and 0.33 for two chatbot styles, against 0.53). After 45 days neither chatbot still raised intention, while the materials kept a modest effect. No group reported vaccinating more.</p>
+      <p class="takes"><b>What Saulyq takes from it</b> (my design choice, not the paper&rsquo;s): a short persuasive chat is not enough. Saulyq informs rather than persuades, stays available through the consent window, and must be tested against an improved egu.kz page, not against nothing.</p>
+    </article>
+  </div>
+  <div class="limits"><b>Limits of the evidence.</b> Hou compared the chatbot with usual local promotion, not with good written materials, and in China parents mostly pay for the vaccine themselves. Wang studied older adults rather than parents and a different vaccine, although, as with HPV in Kazakhstan, the vaccine was free. Sehgal tested a single short chat with online volunteers. Together they show that grounded, repeated, human-linked chatbots <i>can</i> raise vaccination, not that Saulyq would.</div>
 
   <h3>How Saulyq works</h3>
   <p class="note">Tap each step.</p>
@@ -659,7 +671,7 @@
     <button type="button" class="step" data-step="1"><span>2</span>Parent asks</button>
     <button type="button" class="step" data-step="2"><span>3</span>Searches the library</button>
     <button type="button" class="step" data-step="3"><span>4</span>Answers, or says "I don't know"</button>
-    <button type="button" class="step" data-step="4"><span>5</span>Hands over to a person</button>
+    <button type="button" class="step" data-step="4"><span>5</span>Points to a person</button>
   </div>
   <div class="flow-panel" id="flowPanel" aria-live="polite"></div>
 
@@ -687,36 +699,17 @@
     </div>
   </div>
 
-  <h3>What I tested</h3>
-  <p class="draft">To do (your own data): run the test protocol below and fill the table. This is your strongest piece of original evidence.</p>
-  <p>Protocol: three general chatbots, Kazakh and Russian, five parent questions based on documented concerns (infertility; "cancer runs in families"; "why vaccinate an 11-year-old against a sexually transmitted infection?"; fainting after injections; "is it free and what do I sign?"). Each answer scored for accuracy against egu.kz and WHO, local fit, language quality and invented facts.</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Question</th><th>Chatbot</th><th>Language</th><th>Accurate?</th><th>Local fit?</th><th>Language quality</th><th>Invented facts?</th></tr></thead>
-      <tbody>
-        <tr><td>Infertility</td><td>[ ]</td><td>Kazakh</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td></tr>
-        <tr><td>Infertility</td><td>[ ]</td><td>Russian</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="phone" style="max-width:340px;">
-    <div class="chat-title">General chatbot (from my test)</div>
-    <div class="msg me">Is it true the HPV vaccine can make my daughter infertile?</div>
-    <div class="msg bad"><div class="from">AI</div>[Paste a real answer from your test, then compare it with Saulyq's answer above]</div>
-  </div>
-
   <h3>The bill</h3>
   <div class="receipt" aria-label="The bill, presented as a receipt">
     <h3>THE BILL</h3>
-    <div class="center">Saulyq: HPV health-advice chatbot<br>Kazakhstan &middot; pilot in 2 regions</div>
+    <div class="center">Saulyq: HPV health-advice chatbot<br>Pilot in Aktobe &amp; Zhambyl regions</div>
     <div class="center" style="margin-top:6px">Tap a line to see why</div>
     <hr>
-    <details class="bill-line"><summary class="line-item"><span class="what">Environmental</span><span class="cost low">LOW</span></summary><div class="detail">Short Q&amp;A sessions in a two-week window per school year, answered from a small library: small compared with an always-on service. But if hosted in Kazakhstan, it runs on a grid where coal supplies over 70% of electricity (IEA, 2022), so "small" is not "zero". No reliable per-question energy figure exists, so none is claimed.</div></details>
-    <details class="bill-line"><summary class="line-item"><span class="what">Economic</span><span class="cost med">MEDIUM</span></summary><div class="detail">The state pays: building, hosting, Kazakh/Russian content and paid medical reviewers. If the model is a foreign commercial API, money and dependence flow abroad; a locally hosted model is easier to govern, but its Kazakh quality would need testing. The benchmark is cost per extra vaccinated girl versus simply improving egu.kz.</div></details>
-    <details class="bill-line"><summary class="line-item"><span class="what">Labour</span><span class="cost med">MEDIUM</span></summary><div class="detail">Hidden work: doctors who verify every answer, translators, staff who read question logs (in China, two experts hand-coded 16,950 questions), class teachers who distribute links unpaid, and school nurses who absorb the extra consultations the bot creates.</div></details>
-    <details class="bill-line"><summary class="line-item"><span class="what">Political &amp; governance</span><span class="cost high">HIGH</span></summary><div class="detail">A government-run bot inherits distrust of the government. Kazakhstan's AI Law bans manipulative AI systems, so a bot built to <i>persuade</i> is legally and ethically risky; Saulyq must inform, not nudge. New government guidelines demand human oversight, and research on Kazakhstan's public-sector AI warns that the main risks lie in centralised data and weak accountability (Buribayeva et al., 2026). The worst misuse: linking chat logs to the refusal register to identify "hesitant" families.</div></details>
-    <details class="bill-line"><summary class="line-item"><span class="what">Data ethics</span><span class="cost high">HIGH</span></summary><div class="detail">Parents would be asking about an 11-year-old's future sexual health. That requires anonymity, no accounts, minimal logs, storage inside Kazakhstan, and clear notice that the user is talking to AI.</div></details>
+    <details class="bill-line"><summary class="line-item"><span class="what">Environmental</span><span class="cost low">LOW</span></summary><div class="detail">Saulyq does not train a new AI model. It runs an existing one, plus a search in a short library, and only for about two weeks a year around each school&rsquo;s consent deadline. So the computing power it needs, and the energy that uses, is small compared with an always-on chatbot. Data centres also use water, both to cool servers and to produce their electricity <span class="cite">(Li et al., 2023)</span>. Saulyq would run on servers in Kazakhstan, where coal produces over 70% of electricity <span class="cite">(IEA, 2022)</span>. The cost is small, not zero. Most AI providers do not disclose their energy or water use <span class="cite">(Luccioni et al., 2024)</span>, so I give no figure per question.</div></details>
+    <details class="bill-line"><summary class="line-item"><span class="what">Economic</span><span class="cost med">MEDIUM</span></summary><div class="detail">What it costs: building the bot, hosting it in Kazakhstan, writing the content in Kazakh and Russian, and paying the doctors who check and update it. Who pays: the state. Keeping data in the country rules out a cheaper foreign AI service; a model hosted in Kazakhstan is easier to control, but it may write Kazakh less well, and that must be tested. Who profits: the company that builds and hosts the bot and, if more girls are vaccinated, the maker of Gardasil, the US-made vaccine used <span class="cite">(Kazinform, 2025)</span>. Saulyq should be open about this if parents ask. The real test is value for money: does Saulyq get more girls vaccinated, per tenge spent, than simply improving the egu.kz website?</div></details>
+    <details class="bill-line"><summary class="line-item"><span class="what">Labour</span><span class="cost med">MEDIUM</span></summary><div class="detail">No job disappears, but work shifts. Polyclinic doctors and 7701 operators take more appointments and calls from parents the bot sends their way, and class teachers send the link to parents&rsquo; chats, usually as unpaid extra work. Saulyq also depends on people that parents never see. Doctors check the library before launch, acting as what Tubaro et al. (2020) call &ldquo;verifiers&rdquo;. They do not read each live answer, so the library must be right. Translators prepare every entry in Kazakh and Russian. Someone must keep the library up to date: when the programme was extended to girls aged 14&ndash;17 in May 2026, every related answer would have had to change. And the AI model itself was built with the work of data workers who labelled text, work that usually stays invisible <span class="cite">(Williams &amp; Miceli, 2023)</span>.</div></details>
+    <details class="bill-line"><summary class="line-item"><span class="what">Political &amp; governance</span><span class="cost high">HIGH</span></summary><div class="detail">Who controls it: the National Center for Public Health would run Saulyq and decide what goes into its library; whoever owns the AI model controls how it writes. Servers and data stay in Kazakhstan. If the government runs the bot, parents who distrust the government may distrust the bot too. Kazakhstan&rsquo;s AI Law bans manipulative AI, so Saulyq must give information, not pressure parents. Government guidelines require human oversight of AI, and research on AI in Kazakhstan&rsquo;s public sector warns that the main risks are centralised data and weak accountability <span class="cite">(Buribayeva et al., 2026)</span>. The worst misuse would be to start saving chats and match them with the refusal register to find &ldquo;hesitant&rdquo; families.</div></details>
+    <details class="bill-line"><summary class="line-item"><span class="what">Data ethics</span><span class="cost high">HIGH</span></summary><div class="detail">What data: only the question a parent types. Saulyq asks for no name and saves nothing. Whose consent: the parent chooses to use it and must be told clearly that they are talking to an AI. The daughter, whose health is being discussed, is never asked. What could go wrong: the AI ignores its library and invents an answer, which is why every answer must show its source; an outdated entry gives every parent the same wrong answer at once; a fake &ldquo;Saulyq&rdquo; link appears in a parents&rsquo; chat, just as the infertility rumour did; or whoever runs Saulyq later decides to start saving questions, so &ldquo;no saved questions&rdquo; must be written into its rules, not only its design.</div></details>
     <hr>
     <div class="total"><span>TOTAL</span><span>Only under conditions</span></div>
     <div class="center" style="margin-top:8px">&darr; see verdict</div>
@@ -737,13 +730,12 @@
   <path d="M108 62 h32 a16 10 0 0 1 -32 0 Z" fill="#f0b94d"/>
 </svg></div>
   <h2><small>Verdict</small>Should Kazakhstan do this?</h2>
-  <p class="draft">Draft verdict for you to accept, change or reject. The verdict is the part of the project most clearly yours: rewrite it in your own words.</p>
   <div class="verdict">
     <p><b>Not as a national rollout. Yes, as a measured pilot, only under these conditions:</b></p>
     <ol>
       <li><b>Inform, don't persuade.</b> Answers come only from vetted egu.kz content, are signed by doctors, and the bot says "I don't know" rather than guessing.</li>
       <li><b>Protect the parent.</b> No identification, no link to the refusal register, storage in Kazakhstan, clear AI labelling.</li>
-      <li><b>Send people to humans.</b> Every conversation ends with a path to a school nurse or polyclinic, and those nurses get the same library and the time to use it.</li>
+      <li><b>Send people to humans.</b> Every conversation ends with a path to a polyclinic doctor or the 7701 hotline, and those doctors get the same library and the time to use it.</li>
       <li><b>Prove it beats a leaflet.</b> Pilot it in the regions with the most refusals, Aktobe and Zhambyl, against an improved egu.kz FAQ, and measure signed consent forms, not opinions. If it does not beat the FAQ, do not scale it.</li>
     </ol>
     <p>The evidence says the problem is less a lack of facts than a lack of a trusted voice at the right moment. AI can deliver the right facts at 21:47. It cannot, by itself, become the trusted voice. That has to come from the doctors behind it.</p>
@@ -753,8 +745,8 @@
   <div class="phone">
     <div class="chat-title">5&laquo;B&raquo; class parents' chat</div>
     <div class="time">21:58</div>
-    <div class="msg form"><div class="from">Class teacher</div>Reminder: please return the HPV consent form by Friday. Questions? Ask Saulyq (link) or the school nurse.</div>
-    <div class="msg me">Asked the bot about the infertility thing. It linked the official page and a doctor's answer. Booking a call with the nurse tomorrow, then I'll decide.</div>
+    <div class="msg form"><div class="from">Class teacher</div>Reminder: please return the HPV consent form by Friday. Questions? Ask Saulyq (link) or your polyclinic doctor.</div>
+    <div class="msg me">Asked the bot about the infertility thing. It linked the official page and a doctor's answer. Booking a call with our polyclinic doctor tomorrow, then I'll decide.</div>
   </div>
   <p class="label">The goal is not a signature. It is a decision made with good information.</p>
 </section>
@@ -762,158 +754,52 @@
 <!-- ================================ TRANSPARENCY ================================ -->
 <section id="transparency">
   <h2><small>Required</small>AI transparency statement</h2>
-  <p class="draft">Draft: check every line, then make it yours.</p>
-  <p><b>What AI (Claude, Anthropic) contributed.</b> Claude helped me narrow the topic from vaccination in general to HPV and parents, suggested sources, read the full texts of the papers I uploaded, extracted the numbers into a fact-check ledger with page references, built the website's code and visualisations, and drafted the section texts and this statement from those sources.</p>
-  <p><b>What I decided and contributed.</b> [Your words: e.g. choosing HPV and parents as the focus; the opening scene in a school chat at national scope; reviewing and selecting the sources (and dropping some); finding the Ministry's official post and the WHO coverage data; insisting on scholarly findings rather than reading meaning into a press post; the verdict.]</p>
-  <p><b>What I rejected and why.</b> [Your words: e.g. I dropped an interview-based coverage figure for official statistics; I rejected the AI's suggestion that a Ministry post was a reply to a rumour, because it was a coverage update; I disagreed that attitudes from 2021&ndash;22 were seriously out of date.]</p>
-  <p><b>How I checked for hallucinations.</b> Every number on this site is listed in the fact-check ledger below with its source and location. Numbers from the PDFs were checked automatically against the extracted text; numbers from web pages and figures were checked by hand.</p>
+  <p><b>What AI (Claude, Anthropic) contributed.</b> Claude helped me narrow the topic, suggested and checked sources, read the full texts I uploaded and extracted the numbers, built the website&rsquo;s code and visualisations, and drafted section texts, the verdict and my presentation script.</p>
+  <p><b>What I decided.</b> I chose HPV vaccination, parents as the users and the opening scene; selected the official sources (the Ministry&rsquo;s Telegram post, the WHO data file, Kazinform); and set the structure: official data only in Section 2, attitudes and interventions in Section 3 (no health workers, no chatbots), case studies in Section 4. The key design choices are mine: the name Saulyq, no saved questions, servers in Kazakhstan, referral to a doctor or the 7701 hotline, and a pilot in Aktobe and Zhambyl. I also wrote the final form of my research question: &ldquo;whom do they trust, and who could earn that trust back?&rdquo;</p>
+  <p><b>What I rejected and corrected.</b> I dropped sources that did not fit (an interview, a COVID-19 study), rejected the AI&rsquo;s reading of a Ministry coverage post as a reply to a rumour in favour of scholars&rsquo; findings, and caught AI errors: a misread recommendation table (Gallagher), a &ldquo;WHO/UNICEF&rdquo; label my data file does not use, a study wrongly presented as HPV-specific, and a comparison that mixed routine and HPV vaccination. I asked for a whole rewrite of Section 2 to be reverted because it went beyond what I wanted.</p>
+  <p><b>How I checked for hallucinations.</b> I checked the claims and numbers against the original texts myself, using a source tracker organised by website section, with a link to each source.</p>
 </section>
 
-<!-- ================================ LEDGER ================================ -->
-<section id="ledger">
-  <h2><small>Appendix</small>Fact-check ledger</h2>
-  <p>Each number on this site, where it comes from, and how it was checked.</p>
-  <details>
-    <summary>Show all 100 entries</summary>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Claim</th><th>Source</th><th>Where</th><th>Checked</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>191 mothers surveyed in 4 cities, Dec 2021 - Feb 2022; response rate 55%</td><td>Babi et al. 2023</td><td>Abstract; Methods p.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>2</td><td>response rate 55%</td><td>Babi et al. 2023</td><td>Methods p.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>3</td><td>45% of all mothers and 41% of mothers of daughters had positive attitudes</td><td>Babi et al. 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>4</td><td>Mothers of daughters: 23% negative, 36% neutral, 41% positive</td><td>Babi et al. 2023</td><td>Table 2, p.6</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>5</td><td>Mean knowledge 2.4 out of 12</td><td>Babi et al. 2023</td><td>Results p.8</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>6</td><td>Median knowledge 0 of 12 among mothers with negative or neutral attitudes</td><td>Babi et al. 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>7</td><td>Almost 40% learned about the HPV vaccine from social media and TV; 35% from gynecologists and family physicians</td><td>Babi et al. 2023</td><td>Results p.8</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>8</td><td>Least-used sources: pediatricians and schools</td><td>Babi et al. 2023</td><td>Results p.8</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>9</td><td>Only 36% of those who reached a decision found it easy</td><td>Babi et al. 2023</td><td>Results p.8</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>10</td><td>Of mothers who found it hard to talk to daughters about sexual health, 46% had negative attitudes</td><td>Babi et al. 2023</td><td>Results p.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>11</td><td>Mothers with 4+ children: 57% neutral</td><td>Babi et al. 2023</td><td>Results p.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>12</td><td>Japan: coverage fell to less than 1% after reports of side effects</td><td>Babi et al. 2023</td><td>Introduction p.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>13</td><td>Neutral mothers had the lowest knowledge; authors see indicating a potential for a positive after education</td><td>Babi et al. 2023</td><td>Discussion p.9</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>14</td><td>Majority of mothers in Astana and Aktobe had neutral attitudes (mothers of daughters)</td><td>Babi et al. 2023</td><td>Results p.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>15</td><td>233 women; 54% positive attitudes</td><td>Aimagambetova et al. 2022</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>16</td><td>Trust high in medical workers and scientific researchers; low in government, pharma, media</td><td>Aimagambetova et al. 2022</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>17</td><td>Trust counts (somewhat + completely): researchers 113+45=158; medical workers 98+37=135; pharma 37+8=45; traditional media 36+6=42; government 33+5=38; alternative media 22+7=29</td><td>Aimagambetova et al. 2022</td><td>Figure 2, p.7 (read from rendered figure; legend says % but values are counts of respondents)</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>18</td><td>Less positive: lower education, more children, belief in alternative medicine, affected by failed 2013 programme</td><td>Aimagambetova et al. 2022</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>19</td><td>56% disagreed that vaccinating girls encourages them to have sex</td><td>Aimagambetova et al. 2022</td><td>Results p.6</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>20</td><td>Quote: &#x27;I heard the HPV vaccine can cause infertility&#x27;</td><td>Kassabekova et al. 2025</td><td>Table 3 p.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>21</td><td>Mothers believed cervical cancer is hereditary</td><td>Kassabekova et al. 2025</td><td>Section 3.4.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>22</td><td>Trusted messengers: gynecologists, oncologists, international health organizations</td><td>Kassabekova et al. 2025</td><td>Section 4.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>23</td><td>Almaty and Taldykorgan open to school vaccination; Pavlodar, Uralsk, Karaganda opposed</td><td>Kassabekova et al. 2025</td><td>Section 3.4.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>24</td><td>Nurses had limited HPV knowledge</td><td>Kassabekova et al. 2025</td><td>Section 3.4.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>25</td><td>Routine coverage 2022: DTP 97.1%</td><td>Kassabekova et al. 2025</td><td>Section 3.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>26</td><td>Study did not include vaccine-hesitant fathers</td><td>Kassabekova et al. 2025</td><td>Section 4.5</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>27</td><td>1,189 health professionals</td><td>Kassymbekova et al. 2024</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>28</td><td>Median knowledge 11/18; physicians 13 vs nurses 9</td><td>Kassymbekova et al. 2024</td><td>Section 3.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>29</td><td>72.6% would recommend the vaccine</td><td>Kassymbekova et al. 2024</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>30</td><td>Barriers named: public mistrust 49.4%, fear of side effects 45.9%, own knowledge 30.3%</td><td>Kassymbekova et al. 2024</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>31</td><td>&#x27;Can HPV cause cervical cancer?&#x27; correct: nurses 55.3%, physicians 83.8%</td><td>Kassymbekova et al. 2024</td><td>Figure 1 p.5</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>32</td><td>&#x27;Does the HPV vaccine protect against all types?&#x27; correct: nurses 20.0%, physicians 44.3%</td><td>Kassymbekova et al. 2024</td><td>Figure 1 p.5</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>33</td><td>&#x27;Is HPV common in our population?&#x27; correct: nurses 39.8%, physicians 72.4%</td><td>Kassymbekova et al. 2024</td><td>Figure 1 p.5</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>34</td><td>&#x27;What age is recommended by WHO?&#x27; correct: nurses 41.8%, physicians 72.4%</td><td>Kassymbekova et al. 2024</td><td>Figure 1 p.5</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>35</td><td>Cervical cancer 2021: crude incidence 18.3 per 100,000 women</td><td>BMJ Open protocol 2023</td><td>Introduction p.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>36</td><td>crude mortality 9.1 per 100,000 women</td><td>BMJ Open protocol 2023</td><td>Introduction p.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>37</td><td>About 1,800 cases and 600 deaths a year</td><td>BMJ Open protocol 2023</td><td>Introduction p.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>38</td><td>Pilot started 2014 in four regions, discontinued 2017 after parental refusal driven by negative media</td><td>BMJ Open protocol 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>39</td><td>National cervical screening since 2008</td><td>BMJ Open protocol 2023</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>40</td><td>2,671 parents, 180 classes; 7.1% vs 1.8% received or booked the vaccine in 2 weeks</td><td>Hou et al. 2025</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>41</td><td>Consultations with health professionals 49.1% vs 17.6%</td><td>Hou et al. 2025</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>42</td><td>Rural areas: 8.81 times higher</td><td>Hou et al. 2025</td><td>Results, Subgroup analysis</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>43</td><td>Nurse persona users 2.08 times more likely to start vaccination than expert-only</td><td>Hou et al. 2025</td><td>Results, Chatbot engagement</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>44</td><td>GPT-4 with retrieval-augmented generation on a knowledge base verified by public health experts</td><td>Hou et al. 2025</td><td>Methods, Intervention</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>45</td><td>16,950 questions; safety and side effects top topic: 88.6% of users, 23.8% of questions</td><td>Hou et al. 2025</td><td>Results, Chatbot engagement</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>46</td><td>81% of the intervention group used the chatbot</td><td>Hou et al. 2025</td><td>Results</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>47</td><td>Chatbot link re-sent every four days</td><td>Hou et al. 2025</td><td>Methods</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>48</td><td>Effects on willingness and confidence not statistically significant</td><td>Hou et al. 2025</td><td>Results</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>49</td><td>Vaccine paid out-of-pocket in the study areas</td><td>Hou et al. 2025</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>50</td><td>Mothers were 87.7% of participants</td><td>Hou et al. 2025</td><td>Results</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>51</td><td>Recruitment through digital parent communities such as WeChat groups</td><td>Hou et al. 2025</td><td>Methods</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>52</td><td>2,671 parents from 180 middle school classes</td><td>Hou et al. 2025</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>53</td><td>1,297 parents in US, Canada, UK</td><td>Sehgal et al. 2026</td><td>Key Points</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>54</td><td>Immediate effect vs no message: materials d=0.53</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>55</td><td>default chatbot d=0.48</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>56</td><td>conversational chatbot d=0.33</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>57</td><td>No intervention increased self-reported vaccination</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>58</td><td>At 45 days chatbot effects gone; materials kept modest effects</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>59</td><td>GPT-4o chatbot, 3-minute interaction</td><td>Sehgal et al. 2026</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>60</td><td>Exploratory: empathy-focused exchanges associated with lower intent</td><td>Sehgal et al. 2026</td><td>Discussion p.12</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>61</td><td>79 studies; 72.2% in the US; 32.9% in schools; 31.6% informational; 76.3% single-level</td><td>Escoffery et al. 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>62</td><td>Need to go beyond education alone and beyond a single level</td><td>Escoffery et al. 2023</td><td>Abstract, Conclusions</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>63</td><td>Not peer-reviewed</td><td>Chayakova et al. 2026 (preprint)</td><td>Title page</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>64</td><td>Registered refusals rose from 39,792 to 66,240 (2024-2026 stocks)</td><td>Chayakova et al. 2026 (preprint)</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>65</td><td>HPV added to register in 2025: 9,209 refusals (13.9% of refusers); Aktobe 3,037, Zhambyl 2,791</td><td>Chayakova et al. 2026 (preprint)</td><td>Section 3.4</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>66</td><td>Personal beliefs 62.1%, religious 15.5% of refusals (all vaccines, 2025)</td><td>Chayakova et al. 2026 (preprint)</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>67</td><td>Register shows 3.35-3.84x more BCG refusals than routine reports; 46 of 180 cumulative counts decreased</td><td>Chayakova et al. 2026 (preprint)</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>68</td><td>Astana: 22.2% of women in primary care refuse or intend to refuse HPV vaccination for a daughter (Umbetzhanova et al. 2026, cited in preprint, not read)</td><td>Chayakova et al. 2026 citing Umbetzhanova et al. 2026</td><td>Discussion 4.2</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>69</td><td>WHO/UNICEF first-dose coverage 38% (2024), 47% (2025); last dose 45% (2025); 90,613 first doses in 2025; targets 192,936 (WHO/UNICEF) vs 206,360 (national report); national 43.91%</td><td>WHO Immunization Data Portal export (your .xlsx)</td><td>Rows HPV_FEM1 / PRHPV1_F / PRHPVC_F</td><td>Checked in your WHO .xlsx file (script)</td></tr>
-          <tr><td>70</td><td>Ministry: more than 360,000 girls with a first dose; 301.7k (301,700) dose 1 and 196.6k dose 2 (girls 11-13, Sept 2024 - 12 Oct 2026); 58.6k / 19.1k (14-17, since May 2026); voluntary with parental consent</td><td>Ministry of Healthcare Telegram post (Nov 2026)</td><td>Text you pasted</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>71</td><td>Astana: 36.5% first-dose coverage of target group (10 months 2025); 34.3% second dose</td><td>Kazinform (Nov 2025)</td><td>Article</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>72</td><td>WHO 2030 target: 90% of girls fully vaccinated by age 15</td><td>WHO (2020) Global strategy</td><td>Overview</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>73</td><td>egu.kz HPV page: infertility claim called refuted; 131 vaccinated women from the pilot had 1-2 children; pilot fainting described as stress reaction; Gardasil-4, 2 doses 6 months apart, age 11</td><td>egu.kz (NCPH), &#x27;Vaccines against HPV&#x27; page</td><td>Page text (read via a summarising tool, verify in Kazakh/Russian)</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>74</td><td>egu.kz FAQ has no HPV question</td><td>egu.kz/faq</td><td>FAQ page</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>75</td><td>Coal: over 70% of Kazakhstan&#x27;s electricity generation</td><td>IEA (2022) Kazakhstan 2022 review</td><td>Executive summary</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>76</td><td>Nationwide HPV campaign started September 2024; halting earlier programme cost Kazakhstan its place in the global supply queue</td><td>Astana Times (Dec 2025)</td><td>Article</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>77</td><td>AI Law requires labelling of AI-generated content and bans manipulative AI systems</td><td>Law No. 230-VIII (check the official text on the Course Hub)</td><td>Course Hub excerpt</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>78</td><td>Government guidelines on AI in public bodies stress human oversight and accountability</td><td>Ministry of AI and Digital Development (Oct 2026)</td><td>gov.kz page</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>79</td><td>HPV causes almost all cervical cancer</td><td>Hou et al. 2025</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>80</td><td>HPV vaccination prevents about 90% of HPV-associated cancers</td><td>Sehgal et al. 2026</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>81</td><td>HPV-16 and HPV-18 cause up to 75% of cervical cancers</td><td>Babi et al. 2023</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>82</td><td>High-risk HPV found in 39% of women in regional studies</td><td>Babi et al. 2023</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>83</td><td>WHO target age for HPV vaccination 9-14</td><td>Babi et al. 2023</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>84</td><td>Two public health experts manually categorised 16,950 questions</td><td>Hou et al. 2025</td><td>Results</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>85</td><td>Focus groups in five cities (Almaty, Taldykorgan, Karaganda, Pavlodar, Oral)</td><td>Kassabekova et al. 2025</td><td>Methods 2.1.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>86</td><td>Sehgal sample predominantly White and female, moderate-to-high AI familiarity</td><td>Sehgal et al. 2026</td><td>Limitations</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>87</td><td>Global first-dose HPV coverage among girls 33% in 2025</td><td>WHO immunization coverage fact sheet</td><td>Key facts</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>88</td><td>Buribayeva et al.: main risks of public-sector AI lie in legal design, centralised data and weak accountability</td><td>Buribayeva et al. 2026 (via press summary; read the paper on the Course Hub)</td><td>Summary</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>89</td><td>egu.kz: 7701 vaccination hotline</td><td>egu.kz catch-up vaccination page</td><td>Page footer/contacts</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>90</td><td>Nurses n = 591, physicians n = 598</td><td>Kassymbekova et al. 2024</td><td>Figure 1 legend / Table 1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>91</td><td>Cervical cancer is the second most common cancer among women in Kazakhstan</td><td>BMJ Open protocol 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>92</td><td>5 focus groups with 53 mothers or caregivers of adolescent girls, March 2023</td><td>Kassabekova et al. 2025</td><td>Methods 2.1.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>93</td><td>Fieldwork March 13-31, 2023</td><td>Kassabekova et al. 2025</td><td>Methods 2.1.1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>94</td><td>191 mothers, 141 of them with daughters</td><td>Babi et al. 2023</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>95</td><td>Aimagambetova sample included women without children (73, 21%)</td><td>Aimagambetova et al. 2022</td><td>Table 1</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>96</td><td>Health worker survey Dec 2022 - May 2023</td><td>Kassymbekova et al. 2024</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>97</td><td>Health workers&#x27; own lack of knowledge named as barrier by 30.3%</td><td>Kassymbekova et al. 2024</td><td>Abstract</td><td>Automatic: text found in the PDF</td></tr>
-          <tr><td>98</td><td>egu.kz HPV page: vaccine protects against types causing about 71% of cervical cancers; screening for women 30-70 every 4 years; types 6, 11, 16, 18; WHO optimal age 9-14</td><td>egu.kz (NCPH), &#x27;Vaccines against HPV&#x27; page</td><td>Page text (read via a summarising tool, verify in Kazakh/Russian)</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>99</td><td>Ministry: monitoring registered no adverse events after immunization among vaccinated girls; vaccine free, state-funded, voluntary with consent of parents or legal guardians</td><td>Ministry of Healthcare Telegram post (Nov 2026)</td><td>Text you pasted</td><td><b>By hand</b>: please confirm in the source</td></tr>
-          <tr><td>100</td><td>WHO recommends vaccinating girls aged 9-14 before sexual activity begins</td><td>Hou et al. 2025</td><td>Introduction</td><td>Automatic: text found in the PDF</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </details>
-</section>
+
 
 <!-- ================================ REFERENCES ================================ -->
 <section id="sources">
   <h2><small>References</small>Sources</h2>
+  <p class="takeaway">27 sources: peer-reviewed studies, official data and news reports.</p>
+  <details class="more"><summary>Show all 27 references</summary>
   <ol class="refs">
     <li>Aimagambetova, G., Babi, A., Issa, T., &amp; Issanov, A. (2022). What factors are associated with attitudes towards HPV vaccination among Kazakhstani women? Exploratory analysis of cross-sectional survey data. <i>Vaccines, 10</i>(5), 824. <a href="https://doi.org/10.3390/vaccines10050824">doi.org/10.3390/vaccines10050824</a></li>
     <li>Astana Times. (2025, December). Kazakhstan steps up cervical cancer prevention as HPV vaccine rollout progresses. <a href="https://astanatimes.com/2025/12/kazakhstan-steps-up-cervical-cancer-prevention-as-hpv-vaccine-rollout-progresses/">astanatimes.com</a></li>
     <li>Babi, A., Issa, T., Issanov, A., et al. (2023). Knowledge and attitudes of mothers toward HPV vaccination: A cross-sectional study in Kazakhstan. <i>Women's Health, 19</i>. <a href="https://doi.org/10.1177/17455057231172355">doi.org/10.1177/17455057231172355</a></li>
+    <li>Brewer, N. T., Hall, M. E., Malo, T. L., Gilkey, M. B., Quinn, B., &amp; Lathren, C. (2017). Announcements versus conversations to improve HPV vaccination coverage: A randomized trial. <i>Pediatrics, 139</i>(1), e20161764. <a href="https://doi.org/10.1542/peds.2016-1764">doi.org/10.1542/peds.2016-1764</a> (open access: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5192091/">PMC5192091</a>)</li>
     <li>Buribayeva, M., Khamzina, Z., &amp; Buribayev, Y. (2026). Potential negative effects of artificial intelligence in Kazakhstan's public sector: An analysis of hidden risks. <i>Frontiers in Artificial Intelligence, 9</i>, 1781993.</li>
     <li>Chayakova, A., Bisarina, G., Mussina, A., &amp; Yerdenova, G. (2026). Parental vaccine refusal in Kazakhstan, 2023&ndash;2025: A nationwide register-based ecological and spatial analysis [Preprint, not peer-reviewed]. <i>Preprints.org</i>. <a href="https://doi.org/10.20944/preprints202611.0709.v1">doi.org/10.20944/preprints202611.0709.v1</a></li>
     <li>egu.kz. (n.d.). Vaccines against HPV; FAQ. National Center for Public Health of the Republic of Kazakhstan. <a href="https://egu.kz/vakciny-protiv-vpch">egu.kz</a></li>
     <li>Escoffery, C., Petagna, C., Agnone, C., et al. (2023). A systematic review of interventions to promote HPV vaccination globally. <i>BMC Public Health, 23</i>, 1262. <a href="https://doi.org/10.1186/s12889-023-15876-5">doi.org/10.1186/s12889-023-15876-5</a></li>
+    <li>Gallagher, K. E., Howard, N., Kabakama, S., et al. (2017). Lessons learnt from human papillomavirus (HPV) vaccination in 45 low- and middle-income countries. <i>PLoS ONE, 12</i>(6), e0177773. <a href="https://doi.org/10.1371/journal.pone.0177773">doi.org/10.1371/journal.pone.0177773</a></li>
+    <li>Hansen, P. R., Schmidtblaicher, M., &amp; Brewer, N. T. (2020). Resilience of HPV vaccine uptake in Denmark: Decline and recovery. <i>Vaccine, 38</i>(7), 1842&ndash;1848. <a href="https://doi.org/10.1016/j.vaccine.2019.12.019">doi.org/10.1016/j.vaccine.2019.12.019</a></li>
     <li>Hou, Z., Wu, Z., Qu, Z., et al. (2025). A vaccine chatbot intervention for parents to improve HPV vaccination uptake among middle school girls: A cluster randomized trial. <i>Nature Medicine, 31</i>, 1855&ndash;1862. <a href="https://doi.org/10.1038/s41591-025-03618-6">doi.org/10.1038/s41591-025-03618-6</a></li>
     <li>International Energy Agency. (2022). <i>Kazakhstan 2022: Energy policy review</i>. IEA. <a href="https://www.iea.org/reports/kazakhstan-2022">iea.org</a></li>
     <li>Kassabekova, L., Smagul, M., Nukenova, G., et al. (2025). Barriers to vaccine acceptance and immunization coverage in Kazakhstan: A mixed-methods study using the COM-B framework. <i>Frontiers in Public Health, 13</i>, 1600363. <a href="https://doi.org/10.3389/fpubh.2025.1600363">doi.org/10.3389/fpubh.2025.1600363</a></li>
     <li>Kassymbekova, F., Zhetpisbayeva, I., Tcoy, E., et al. (2023). Exploring HPV vaccine knowledge, attitudes, barriers and information sources among parents, health professionals and teachers in Kazakhstan: A mixed-methods study protocol. <i>BMJ Open, 13</i>, e074097. <a href="https://doi.org/10.1136/bmjopen-2023-074097">doi.org/10.1136/bmjopen-2023-074097</a></li>
-    <li>Kassymbekova, F., Rommel, A., Kaidarova, D., et al. (2024). Developing HPV vaccination communication strategies: Assessing knowledge, attitudes, and barriers among healthcare professionals in Kazakhstan. <i>Vaccines, 12</i>, 1225. <a href="https://doi.org/10.3390/vaccines12111225">doi.org/10.3390/vaccines12111225</a></li>
     <li>Kazinform. (2025, November). How many schoolgirls in Astana received the second HPV vaccine dose [in Russian]. <a href="https://www.inform.kz/ru/skolko-shkolnits-v-astane-poluchili-vtoruyu-privivku-protiv-vpch-053ac1">inform.kz</a></li>
     <li>Law of the Republic of Kazakhstan No. 230-VIII "On Artificial Intelligence". (2025). [Cite the official text from the Course Hub.]</li>
+    <li>Li, P., Yang, J., Islam, M. A., &amp; Ren, S. (2023). Making AI less &ldquo;thirsty&rdquo;: Uncovering and addressing the secret water footprint of AI models. <i>arXiv</i>, 2304.03271. <a href="https://arxiv.org/abs/2304.03271">arxiv.org/abs/2304.03271</a></li>
+    <li>Luccioni, S., Trevelin, B., &amp; Mitchell, M. (2024). <i>The environmental impacts of AI: Policy primer</i>. Hugging Face. <a href="https://doi.org/10.57967/hf/3004">doi.org/10.57967/hf/3004</a></li>
     <li>Ministry of Artificial Intelligence and Digital Development of the Republic of Kazakhstan. (2026, October). Guidelines on the application of AI technologies by government bodies. <a href="https://www.gov.kz/memleket/entities/maidd/documents/details/1082252?lang=en">gov.kz</a></li>
-    <li>Ministry of Healthcare of the Republic of Kazakhstan. (2026, November). More than 360 thousand girls in Kazakhstan have received the HPV vaccine [Telegram post, in Russian]. [Add link.]</li>
+    <li>Ministry of Healthcare of the Republic of Kazakhstan. (2026, November). More than 360 thousand girls in Kazakhstan have received the HPV vaccine [Telegram post, in Russian]. <a href="https://t.me/DenMinPR">t.me/DenMinPR</a></li>
     <li>Sehgal, N. K. R., Rai, S., Tonneau, M., et al. (2026). Large language model chatbot conversations vs public health materials and parental HPV vaccination intentions: A randomized clinical trial. <i>JAMA Network Open, 9</i>(6), e2616822. <a href="https://doi.org/10.1001/jamanetworkopen.2026.16822">doi.org/10.1001/jamanetworkopen.2026.16822</a></li>
-    <li>Umbetzhanova, A., Kusniyeva, A., Derbissalina, G., et al. (2026). Knowledge, trust, and multidimensional perceptions of human papillomavirus vaccination among women attending a single primary care centre in Astana, Kazakhstan. <i>Frontiers in Global Women's Health, 7</i>, 1960252. [Cited via Chayakova et al., 2026; not read.]</li>
-    <li>World Health Organization. (2026). <i>Immunization coverage</i> [Fact sheet]. <a href="https://www.who.int/news-room/fact-sheets/detail/immunization-coverage">who.int</a></li>
+    <li>Tubaro, P., Casilli, A. A., &amp; Coville, M. (2020). The trainer, the verifier, the imitator: Three ways in which human platform workers support artificial intelligence. <i>Big Data &amp; Society, 7</i>(1).</li>
+    <li>Wang, Z., Chen, S., Poon, J., et al. (2025). A hybrid chatbot to promote pneumococcal vaccination among older adults: A randomized clinical trial. <i>JAMA Network Open, 8</i>(10), e2535813. <a href="https://doi.org/10.1001/jamanetworkopen.2025.35813">doi.org/10.1001/jamanetworkopen.2025.35813</a></li>
+    <li>Williams, A., &amp; Miceli, M. (2023). Data work and its layers of (in)visibility. <i>Just Tech</i>, Social Science Research Council.</li>
     <li>World Health Organization. (2020). <i>Global strategy to accelerate the elimination of cervical cancer as a public health problem</i>. <a href="https://who.int/publications/i/item/9789240014107">who.int</a></li>
-    <li>WHO &amp; UNICEF. (2026). Human papillomavirus (HPV) vaccination coverage: Kazakhstan [Data set, 2025 revision]. WHO Immunization Data Portal. <a href="https://immunizationdata.who.int/">immunizationdata.who.int</a></li>
+    <li>World Health Organization. (2026a). Human papillomavirus (HPV) vaccination coverage: Kazakhstan [Data set, WHO HPV estimates, 2025 revision]. WHO Immunization Data Portal. <a href="https://immunizationdata.who.int/">immunizationdata.who.int</a></li>
+    <li>World Health Organization. (2026b). <i>Immunization coverage</i> [Fact sheet]. <a href="https://www.who.int/news-room/fact-sheets/detail/immunization-coverage">who.int</a></li>
   </ol>
+  </details>
 </section>
 
-<footer>[Your name or pseudonym] &middot; PLS 419: AI from a Social Science Perspective &middot; Nazarbayev University &middot; Fall 2026</footer>
+<footer>Dinura Baimisheva &middot; PLS 419: AI from a Social Science Perspective &middot; Nazarbayev University &middot; Fall 2026</footer>
 
 <script>
   // Opening: show the outcome for the chosen option, then the continue link
@@ -943,17 +829,6 @@
     });
   })();
 
-  // Quiz: reveal how nurses and physicians answered
-  document.querySelectorAll('#quiz .q').forEach(function (q) {
-    q.querySelectorAll('button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        q.querySelector('.reveal').innerHTML =
-          '<b>' + q.dataset.a + '</b><br>Answered correctly: nurses <b>' + q.dataset.n +
-          '%</b>, physicians <b>' + q.dataset.p + '%</b>.';
-      });
-    });
-  });
-
   // Saulyq: how-it-works stepper
   (function () {
     var steps = [
@@ -961,7 +836,7 @@
       ['A parent opens it on their phone, with no login and no name, and types a question in Kazakh or Russian.', 'Why: questions about a daughter\'s sexual health are sensitive; anonymity lowers the barrier (Babi et al., 2023).'],
       ['Saulyq looks for the answer only in a library of official content (egu.kz, Ministry guidance) checked by doctors. This is retrieval-augmented generation.', 'Why: general chatbots can invent facts; the trial that worked used a verified knowledge base (Hou et al., 2025).'],
       ['If the library has the answer, Saulyq replies in plain words, shows the source and the reviewing doctor. If not, it says so instead of guessing.', 'Why: women trust medical workers far more than the government (Aimagambetova et al., 2022).'],
-      ['Every answer ends with a way to reach a person: the school nurse, the polyclinic or the 7701 hotline.', 'Why: in the Chinese trial, about half of chatbot users went on to consult a health worker (Hou et al., 2025).']
+      ['Every answer ends by telling the parent how to reach a person: book an appointment with the family\'s polyclinic doctor or call 7701. Saulyq passes nothing on; the parent decides whether to get in touch.', 'Why: in the Chinese trial, about half of chatbot users went on to consult a health worker (Hou et al., 2025).']
     ];
     var panel = document.getElementById('flowPanel');
     var btns = document.querySelectorAll('.flow .step');
@@ -979,10 +854,10 @@
       ['No. Kazakhstan\'s National Center for Public Health says the claim that the vaccine causes infertility has been repeatedly refuted by international research. The vaccine contains no live virus and cannot cause an infection.', 'egu.kz, "Vaccines against HPV"', true],
       ['During the earlier pilot, some girls fainted during or after the injection. Doctors attribute this to stress and standing up quickly, not to the quality of the vaccine. In the current programme, the Ministry reports that monitoring has registered no adverse events among vaccinated girls.', 'egu.kz, "Vaccines against HPV"; Ministry of Healthcare (2026)', true],
       ['WHO recommends HPV vaccination at ages 9\u201314, before any possible contact with the virus. In Kazakhstan the programme starts at 11. It is about preventing cancer later in life.', 'egu.kz, "Vaccines against HPV"; WHO', true],
-      ['Yes, it is free: the state pays for it. It is voluntary and given only with the written consent of a parent or legal guardian. The consent form comes from the school.', 'Ministry of Healthcare (2026); Kassabekova et al. (2025)', true],
+      ['Yes, it is free: the state pays for it. It is voluntary and given only with the consent of a parent or legal guardian.', 'Ministry of Healthcare (2026)', true],
       ['Two doses, given six months apart. Kazakhstan uses the Gardasil-4 vaccine, which protects against HPV types 6, 11, 16 and 18.', 'egu.kz, "Vaccines against HPV"', true],
       ['Yes. The vaccine protects against the types that cause about 71% of cervical cancers, not all of them, so screening is still needed: women aged 30\u201370 should be screened every four years.', 'egu.kz, "Vaccines against HPV"', true],
-      ['I can\'t answer that safely: it depends on your daughter\'s condition, and it needs a doctor. Please ask your school nurse or polyclinic, or call the 7701 hotline. You can show them this question.', 'No answer in the library, so Saulyq hands over to a person', false]
+      ['I can\'t answer that safely: it depends on your daughter\'s condition, and it needs a doctor. Please ask your polyclinic doctor or call the 7701 hotline. You can show them this question.', 'No answer in the library, so Saulyq points the parent to a person', false]
     ];
     var log = document.getElementById('demoLog');
     var qs = document.querySelectorAll('#demoQs button');
@@ -996,8 +871,8 @@
         var t = add('<span class="typing"><i></i><i></i><i></i></span>');
         setTimeout(function () {
           t.innerHTML = '<div class="from">Saulyq &middot; AI assistant</div>' + A[i][0] +
-            '<div class="src">' + (A[i][2] ? 'Source: ' : '') + A[i][1] + (A[i][2] ? ' &middot; reviewed by Dr [name]' : '') + '</div>' +
-            '<span class="handoff">Talk to a person: school nurse &middot; 7701</span>';
+            '<div class="src">' + (A[i][2] ? 'Source: ' : '') + A[i][1] + (A[i][2] ? ' &middot; reviewed by Dr [name] (illustrative)' : '') + '</div>' +
+            '<span class="handoff">Talk to a person: your polyclinic doctor &middot; 7701</span>';
           log.scrollTop = log.scrollHeight;
         }, 900);
       });
